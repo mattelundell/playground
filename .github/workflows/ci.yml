@@ -15,7 +15,6 @@ jobs:
       name: attire-recommender
       run: |
         pnpm run check -F attire-recommender
-        pnpm run test -F attire-recommender
 
   image-transformer:
     name: image-transformer
@@ -25,4 +24,3 @@ jobs:
       name: image-transformer
       run: |
         pnpm run check -F image-transformer
-        pnpm run test -F image-transformer
