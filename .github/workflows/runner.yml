@@ -29,6 +29,9 @@ permissions:
 
 jobs:
   runner:
+    permissions:
+      id-token: write
+      contents: read
     name: ${{ inputs.name }} - ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
