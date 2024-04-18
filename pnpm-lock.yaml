@@ -4,63 +4,101 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@aws-sdk/client-api-gateway':
-    specifier: ^3.554.0
-    version: 3.556.0
-  '@aws-sdk/client-dynamodb':
-    specifier: 3.515.0
-    version: 3.515.0
-  '@aws-sdk/client-eventbridge':
-    specifier: 3.515.0
-    version: 3.515.0
-  '@aws-sdk/lib-dynamodb':
-    specifier: 3.515.0
-    version: 3.515.0(@aws-sdk/client-dynamodb@3.515.0)
-  aws-lambda:
-    specifier: ^1.0.7
-    version: 1.0.7
-  http-status-codes:
-    specifier: ^2.3.0
-    version: 2.3.0
-  turbo:
-    specifier: ^1.13.2
-    version: 1.13.2
-  zod:
-    specifier: ^3.22.4
-    version: 3.22.4
+importers:
 
-devDependencies:
-  '@tsconfig/node18':
-    specifier: ^18.2.4
-    version: 18.2.4
-  '@types/aws-lambda':
-    specifier: ^8.10.137
-    version: 8.10.137
-  '@types/node':
-    specifier: ^20.12.7
-    version: 20.12.7
-  aws-cdk-lib:
-    specifier: 2.132.1
-    version: 2.132.1(constructs@10.3.0)
-  constructs:
-    specifier: 10.3.0
-    version: 10.3.0
-  husky:
-    specifier: ^9.0.11
-    version: 9.0.11
-  lint-staged:
-    specifier: ^15.2.2
-    version: 15.2.2
-  prettier:
-    specifier: ^3.2.5
-    version: 3.2.5
-  sst:
-    specifier: ^2.41.4
-    version: 2.41.4(@aws-sdk/credential-provider-node@3.556.0)
-  typescript:
-    specifier: ^5.4.4
-    version: 5.4.5
+  .:
+    dependencies:
+      '@aws-sdk/client-api-gateway':
+        specifier: ^3.554.0
+        version: 3.556.0
+      '@aws-sdk/client-dynamodb':
+        specifier: 3.515.0
+        version: 3.515.0
+      '@aws-sdk/client-eventbridge':
+        specifier: 3.515.0
+        version: 3.515.0
+      '@aws-sdk/lib-dynamodb':
+        specifier: 3.515.0
+        version: 3.515.0(@aws-sdk/client-dynamodb@3.515.0)
+      aws-lambda:
+        specifier: ^1.0.7
+        version: 1.0.7
+      http-status-codes:
+        specifier: ^2.3.0
+        version: 2.3.0
+      turbo:
+        specifier: ^1.13.2
+        version: 1.13.2
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
+    devDependencies:
+      '@tsconfig/node18':
+        specifier: ^18.2.4
+        version: 18.2.4
+      '@types/aws-lambda':
+        specifier: ^8.10.137
+        version: 8.10.137
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.12.7
+      aws-cdk-lib:
+        specifier: 2.132.1
+        version: 2.132.1(constructs@10.3.0)
+      constructs:
+        specifier: 10.3.0
+        version: 10.3.0
+      husky:
+        specifier: ^9.0.11
+        version: 9.0.11
+      lint-staged:
+        specifier: ^15.2.2
+        version: 15.2.2
+      prettier:
+        specifier: ^3.2.5
+        version: 3.2.5
+      sst:
+        specifier: ^2.41.4
+        version: 2.41.4(@aws-sdk/credential-provider-node@3.556.0)
+      typescript:
+        specifier: ^5.4.4
+        version: 5.4.5
+
+  apps/attire-recommender:
+    devDependencies:
+      '@tsconfig/node18':
+        specifier: ^18.2.4
+        version: 18.2.4
+      aws-cdk-lib:
+        specifier: 2.132.1
+        version: 2.132.1(constructs@10.3.0)
+      constructs:
+        specifier: 10.3.0
+        version: 10.3.0
+      sst:
+        specifier: ^2.41.4
+        version: 2.41.4(@aws-sdk/credential-provider-node@3.556.0)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+
+  apps/image-transformer:
+    devDependencies:
+      '@tsconfig/node18':
+        specifier: ^18.2.4
+        version: 18.2.4
+      aws-cdk-lib:
+        specifier: 2.132.1
+        version: 2.132.1(constructs@10.3.0)
+      constructs:
+        specifier: 10.3.0
+        version: 10.3.0
+      sst:
+        specifier: ^2.41.4
+        version: 2.41.4(@aws-sdk/credential-provider-node@3.556.0)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
 
 packages:
 
@@ -113,6 +151,9 @@ packages:
   /@aws-cdk/cloud-assembly-schema@2.132.1:
     resolution: {integrity: sha512-PAusB9kKT9CELzbj8x5G3BpFl6Wjwk5ULn+8/uP21MIygWmAcktzOD2CVzkxMvljT7qU4KN1GEDCZXVqLzzomg==}
     engines: {node: '>= 14.15.0'}
+    dependencies:
+      jsonschema: 1.4.1
+      semver: 7.6.0
     dev: true
     bundledDependencies:
       - jsonschema
@@ -138,6 +179,7 @@ packages:
       '@aws-cdk/cloud-assembly-schema': 2.132.1
     dependencies:
       '@aws-cdk/cloud-assembly-schema': 2.132.1
+      semver: 7.6.0
     dev: true
     bundledDependencies:
       - semver
@@ -4713,6 +4755,10 @@ packages:
       universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
+    dev: true
+
+  /jsonschema@1.4.1:
+    resolution: {integrity: sha512-S6cATIPVv1z0IlxdN+zUk5EPjkGCdnhN4wVSBlvoUO1tOLJootbo9CquNJmbIh4yikWHiUedhRYrNPn1arpEmQ==}
     dev: true
 
   /kysely-codegen@0.10.1(kysely@0.25.0):

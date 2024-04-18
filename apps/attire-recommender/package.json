@@ -1,0 +1,20 @@
+{
+  "name": "attire-recommender",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sst dev",
+    "build": "sst build",
+    "deploy": "AWS_PROFILE=mattias sst deploy --stage dev",
+    "remove": "sst remove",
+    "check": "sst types --stage test && tsc --noEmit"
+  },
+  "devDependencies": {
+    "sst": "^2.41.4",
+    "aws-cdk-lib": "2.132.1",
+    "constructs": "10.3.0",
+    "typescript": "^5.4.5",
+    "@tsconfig/node18": "^18.2.4"
+  }
+}
