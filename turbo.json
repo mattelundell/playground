@@ -3,7 +3,6 @@
   "pipeline": {
     "check": {},
     "build": {
-      "dependsOn": ["check"],
       "outputs": [".sst"]
     },
     "deploy": {
