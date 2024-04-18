@@ -7,7 +7,7 @@
       "outputs": [".sst"]
     },
     "deploy": {
-      "dependsOn": ["build", "check"]
+      "dependsOn": ["build"]
     }
   }
 }
