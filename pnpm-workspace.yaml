@@ -1,0 +1,6 @@
+packages:
+  - 'apps/**'
+  - '!**/.sst/**'
+  - '!**/dist/**'
+  - '!**/build/**'
+  - '!**/node_modules/**'

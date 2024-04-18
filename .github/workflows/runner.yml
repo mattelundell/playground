@@ -1,0 +1,84 @@
+name: turbo-runner
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: The github environment that will be used during the entire workflow, dev|prod
+        type: string
+        default: dev
+      run:
+        description: This is the last step that will be executed in the workflow
+        required: true
+        type: string
+      name:
+        description: Pretty print job name
+        required: true
+        type: string
+      region:
+        description: The AWS region that will be used during the entire workflow
+        type: string
+        default: eu-north-1
+
+env:
+  LOG_LEVEL: debug
+
+jobs:
+  runner:
+    name: ${{ inputs.name }} - ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+      
+      - uses: ./.github/actions/oidc
+        with:
+          role: ${{ vars.MATTIAS }}
+          profile: mattias
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v3
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-turbo-${{ github.sha }}
+
+      - name: Cache common-lib dist
+        uses: actions/cache@v3
+        with:
+          path: packages/common/dist
+          key: ${{ runner.os }}-common-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-common-${{ github.sha }}
+
+      - name: install
+        run: pnpm install
+
+      - name: exec
+        run: ${{ inputs.run }}
+
+permissions:
+  id-token: write
+  contents: read

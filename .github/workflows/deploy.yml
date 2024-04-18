@@ -1,0 +1,27 @@
+name: Deploy to prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  attire-recommender:
+    name: attire-recommender
+    uses: ./.github/workflows/runner.yml
+    secrets: inherit
+    with:
+      name: attire-recommender
+      run: |
+        pnpm run build -F attire-recommender
+        pnpm run deploy -F attire-recommender
+
+  image-transformer:
+    name: image-transformer
+    uses: ./.github/workflows/runner.yml
+    secrets: inherit
+    with:
+      name: image-transformer
+      run: |
+        pnpm run build -F image-transformer
+        pnpm run deploy -F image-transformer
