@@ -78,3 +78,7 @@ jobs:
 
       - name: exec
         run: ${{ inputs.run }}
+
+permissions:
+  id-token: write
+  contents: read
