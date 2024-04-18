@@ -1,22 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "package": {
-      "outputs": ["dist"] 
-    },
-    "check": {
-      "dependsOn": ["^package"]
-    },
+    "check": {},
     "build": {
-      "dependsOn": ["^package"],
-      "outputs": [".sst", "target"]
-    },
-    "test": {
-      "dependsOn": ["^build"],
-      "cache": false
+      "dependsOn": ["check"],
+      "outputs": [".sst"]
     },
     "deploy": {
-      "dependsOn": ["build", "package"]
+      "dependsOn": ["build", "check"]
     }
   }
 }
