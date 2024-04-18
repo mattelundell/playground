@@ -23,6 +23,10 @@ on:
 env:
   LOG_LEVEL: debug
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   runner:
     name: ${{ inputs.name }} - ${{ inputs.environment }}
@@ -78,7 +82,3 @@ jobs:
 
       - name: exec
         run: ${{ inputs.run }}
-
-permissions:
-  id-token: write
-  contents: read
