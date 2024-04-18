@@ -64,41 +64,9 @@ importers:
         specifier: ^5.4.4
         version: 5.4.5
 
-  apps/attire-recommender:
-    devDependencies:
-      '@tsconfig/node18':
-        specifier: ^18.2.4
-        version: 18.2.4
-      aws-cdk-lib:
-        specifier: 2.132.1
-        version: 2.132.1(constructs@10.3.0)
-      constructs:
-        specifier: 10.3.0
-        version: 10.3.0
-      sst:
-        specifier: ^2.41.4
-        version: 2.41.4(@aws-sdk/credential-provider-node@3.556.0)
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
+  apps/attire-recommender: {}
 
-  apps/image-transformer:
-    devDependencies:
-      '@tsconfig/node18':
-        specifier: ^18.2.4
-        version: 18.2.4
-      aws-cdk-lib:
-        specifier: 2.132.1
-        version: 2.132.1(constructs@10.3.0)
-      constructs:
-        specifier: 10.3.0
-        version: 10.3.0
-      sst:
-        specifier: ^2.41.4
-        version: 2.41.4(@aws-sdk/credential-provider-node@3.556.0)
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
+  apps/image-transformer: {}
 
 packages:
 
