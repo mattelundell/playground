@@ -1,6 +1,9 @@
-import { StackContext, Queue, EventBus, Function } from 'sst/constructs';
+import { StackContext, Queue, EventBus, Function, use } from 'sst/constructs';
+import { StorageStack } from './storage';
 
 export function EventStack({ stack }: StackContext) {
+  const Storage = use(StorageStack);
+
   // TRANSFORMATION
   const transformationQueue = new Queue(stack, 'ImageTransformationQueue', {});
 
@@ -8,7 +11,9 @@ export function EventStack({ stack }: StackContext) {
     stack,
     'ImageTransformationConsumer',
     {
+      bind: [Storage.transformedImages],
       handler: 'src/functions/consumers/transformation.handler',
+      permissions: ['s3:putItem'],
     },
   );
   transformationQueue.addConsumer(stack, transformationConsumer);
@@ -17,7 +22,9 @@ export function EventStack({ stack }: StackContext) {
   const deletionQueue = new Queue(stack, 'ImageDeletionQueue', {});
 
   const deletionConsumer = new Function(stack, 'ImageDelitionConsumer', {
+    bind: [Storage.originalImages, Storage.transformedImages],
     handler: 'src/functions/consumers/deletion.handler',
+    permissions: ['s3:deleteItem'],
   });
 
   deletionQueue.addConsumer(stack, deletionConsumer);
