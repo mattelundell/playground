@@ -1,1 +1,1 @@
-export * from './types';
+export { Parser } from './types';
