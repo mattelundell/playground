@@ -1,4 +1,4 @@
-import { unknown, z } from 'zod';
+import { z } from 'zod';
 
 const ImageProps = z.object({
   name: z.string(),
@@ -36,9 +36,18 @@ export namespace Original {
       })
       .extend(ImageProps.shape)
       .extend(ImageShape.shape);
+
+    export const jpg = z
+      .object({
+        variant: z.literal(Variant.State.Original),
+        extension: z.literal(Extension.Type.Jpg),
+      })
+      .extend(ImageProps.shape)
+      .extend(ImageShape.shape);
   }
 
   export type Png = z.infer<typeof Schemas.png>;
+  export type Jpg = z.infer<typeof Schemas.jpg>;
 
   export namespace Builder {
     export const png = (args: {
@@ -59,6 +68,25 @@ export namespace Original {
         },
       },
     });
+
+    export const jpg = (args: {
+      name: string;
+      extension: string;
+      shape: {
+        height: number;
+        width: number;
+      };
+    }): Image<Jpg> => ({
+      detail: {
+        name: args.name,
+        extension: Extension.Type.Jpg,
+        variant: Variant.State.Original,
+        shape: {
+          height: args.shape.height,
+          width: args.shape.width,
+        },
+      },
+    });
   }
 }
 
@@ -71,9 +99,18 @@ export namespace Transformed {
       })
       .extend(ImageProps.shape)
       .extend(ImageShape.shape);
+
+    export const jpg = z
+      .object({
+        variant: z.literal(Variant.State.Transformed),
+        extension: z.literal(Extension.Type.Jpg),
+      })
+      .extend(ImageProps.shape)
+      .extend(ImageShape.shape);
   }
 
   export type Png = z.infer<typeof Schemas.png>;
+  export type Jpg = z.infer<typeof Schemas.jpg>;
 
   export namespace Builder {
     export const png = (args: {
@@ -94,6 +131,25 @@ export namespace Transformed {
         },
       },
     });
+
+    export const job = (args: {
+      name: string;
+      extension: string;
+      shape: {
+        height: number;
+        width: number;
+      };
+    }): Image<Jpg> => ({
+      detail: {
+        name: args.name,
+        extension: Extension.Type.Jpg,
+        variant: Variant.State.Transformed,
+        shape: {
+          height: args.shape.height,
+          width: args.shape.width,
+        },
+      },
+    });
   }
 }
 
@@ -103,7 +159,10 @@ export type Image<D> = {
 
 const DetailSchema = z.discriminatedUnion('variant', [
   Original.Schemas.png,
+  Original.Schemas.jpg,
+
   Transformed.Schemas.png,
+  Transformed.Schemas.jpg,
 ]);
 
 export type Detail = z.infer<typeof DetailSchema>;
@@ -115,14 +174,17 @@ const ImageSchema = z.object({
 export namespace Parser {
   export const map = <
     T extends Detail['variant'],
-    D = Extract<Detail, { variant: T }>,
+    U extends Detail['extension'],
+    D = Extract<Detail, { variant: T; extension: U }>,
   >(
     image: unknown,
     variant: T,
+    extension: U,
   ): Image<D> | null => {
     const res = ImageSchema.parse(image);
 
-    if (res.detail.variant != variant) return null;
+    if (res.detail.variant != variant || res.detail.extension != extension)
+      return null;
 
     return {
       detail: res.detail as D,
