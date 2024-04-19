@@ -16,6 +16,7 @@ jobs:
     with:
       name: attire-recommender
       run: |
+        pnpm install
         pnpm run deploy -F attire-recommender
 
   image-transformer:
@@ -28,4 +29,6 @@ jobs:
     with:
       name: image-transformer
       run: |
+        pnpm install
+        pnpm run build -F image-transformer
         pnpm run deploy -F image-transformer

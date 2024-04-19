@@ -2,6 +2,7 @@
   "files": [],
   "references": [
     { "path": "./apps/image-transformer" },
-    { "path": "./apps/attire-recommender" }
+    { "path": "./apps/attire-recommender" },
+    { "path": "./packages/images" }
   ]
 }

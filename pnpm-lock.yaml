@@ -68,6 +68,14 @@ importers:
 
   apps/image-transformer: {}
 
+  packages/images:
+    dependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/tsconfig: {}
+
 packages:
 
   /@alcalzone/ansi-tokenize@0.1.3:

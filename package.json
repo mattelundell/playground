@@ -8,11 +8,13 @@
     "check": "turbo check --no-update-notifier --no-daemon",
     "deploy": "turbo deploy --no-update-notifier --no-daemon",
     "format": "prettier --write .",
+    "package": "turbo package --no-update-notifier --no-daemon",
     "prepare": "husky",
     "remove": "turbo remove --no-update-notifier --no-daemon"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "husky": {
     "hooks": {
