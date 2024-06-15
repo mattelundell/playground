@@ -3,7 +3,7 @@ description: 'Assume OIDC role. Outputs the AWS account ID for the assumed role,
 
 inputs:
   role:
-    description: 'The role (ARN) to assume, in the format of arn:aws:iam::<account id>:role/GithubDeployRole'
+    description: 'The role (ARN) to assume, in the format of arn:aws:iam::<account id>:role/GithubDeployToAWS'
     required: true
 
   region:
