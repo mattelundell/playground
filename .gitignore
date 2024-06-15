@@ -1,0 +1,10 @@
+dist
+node_modules
+.turbo
+.envrc
+.vscode
+node_modules/*
+dist/
+build/
+.sst
+.DS_Store
