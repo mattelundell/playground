@@ -1,0 +1,14 @@
+{
+  "name": "image-transformer",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sst dev",
+    "build": "sst build --stage dev",
+    "deploy": "AWS_PROFILE=mattias sst deploy --stage dev",
+    "remove": "sst remove",
+    "check": "sst types --stage test && tsc --noEmit"
+  },
+  "devDependencies": {}
+}

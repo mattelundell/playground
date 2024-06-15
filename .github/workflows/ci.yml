@@ -1,0 +1,30 @@
+name: CI Development Env
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  attire-recommender:
+    permissions:
+      id-token: write
+      contents: read
+    name: attire-recommender
+    uses: ./.github/workflows/runner.yml
+    secrets: inherit
+    with:
+      name: attire-recommender
+      run: |
+        pnpm run check -F attire-recommender
+
+  image-transformer:
+    permissions:
+      id-token: write
+      contents: read
+    name: image-transformer
+    uses: ./.github/workflows/runner.yml
+    secrets: inherit
+    with:
+      name: image-transformer
+      run: |
+        pnpm run check -F image-transformer

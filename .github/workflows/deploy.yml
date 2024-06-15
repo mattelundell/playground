@@ -1,0 +1,34 @@
+name: Deploy to prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  attire-recommender:
+    permissions:
+      id-token: write
+      contents: read
+    name: attire-recommender
+    uses: ./.github/workflows/runner.yml
+    secrets: inherit
+    with:
+      name: attire-recommender
+      run: |
+        pnpm install
+        pnpm run deploy -F attire-recommender
+
+  image-transformer:
+    permissions:
+      id-token: write
+      contents: read
+    name: image-transformer
+    uses: ./.github/workflows/runner.yml
+    secrets: inherit
+    with:
+      name: image-transformer
+      run: |
+        pnpm install
+        pnpm run build -F image-transformer
+        pnpm run deploy -F image-transformer

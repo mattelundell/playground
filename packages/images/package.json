@@ -1,0 +1,18 @@
+{
+  "name": "@mattiaslundel1/playground-images",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "package": "pnpm package:esm && pnpm package:cjs",
+    "package:esm": "tsc --outDir dist/esm --module ES6 --moduleResolution node",
+    "package:cjs": "tsc --outDir dist/cjs --module CommonJS"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "tsconfig": "workspace:*"
+  }
+}
