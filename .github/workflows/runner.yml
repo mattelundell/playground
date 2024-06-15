@@ -56,7 +56,7 @@ jobs:
 
       - uses: ./.github/actions/oidc
         with:
-          role: ${{ vars.AWS_DEPLOY_ROLE }}
+          role: ${{ vars.GithubDeployToAWS }}
           profile: mattias
 
       - name: Cache turbo build setup
