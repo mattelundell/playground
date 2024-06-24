@@ -12,7 +12,7 @@ export function EventStack({ stack }: StackContext) {
     'ImageTransformationConsumer',
     {
       bind: [Storage.transformedImages],
-      handler: 'src/functions/consumers/transformation.handler',
+      handler: 'src/functions/queues/transformationQueue.handler',
       permissions: ['s3:putItem'],
     },
   );
@@ -23,7 +23,7 @@ export function EventStack({ stack }: StackContext) {
 
   const deletionConsumer = new Function(stack, 'ImageDelitionConsumer', {
     bind: [Storage.originalImages, Storage.transformedImages],
-    handler: 'src/functions/consumers/deletion.handler',
+    handler: 'src/functions/queues/deletionQueue.handler',
     permissions: ['s3:deleteItem'],
   });
 
