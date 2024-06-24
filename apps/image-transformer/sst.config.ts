@@ -2,6 +2,7 @@ import { SSTConfig } from 'sst';
 import { API } from './stacks/api';
 import { StorageStack } from './stacks/storage';
 import { EventStack } from './stacks/events';
+import { ImageStack } from './stacks/images';
 
 export default {
   config(_input) {
@@ -13,6 +14,7 @@ export default {
   stacks(app) {
     app.stack(StorageStack);
     app.stack(EventStack);
+    app.stack(ImageStack);
     app.stack(API);
   },
 } satisfies SSTConfig;
