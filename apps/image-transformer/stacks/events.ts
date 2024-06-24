@@ -32,10 +32,10 @@ export function EventStack({ stack }: StackContext) {
   // COOMPLETION
   const eventbus = new EventBus(stack, 'ImageTransformerBus', {});
 
-  eventbus.addRules(stack, {
+  /* eventbus.addRules(stack, {
     TransformationCompleted: {
       pattern: {},
       targets: {},
     },
-  });
+  }); */
 }
